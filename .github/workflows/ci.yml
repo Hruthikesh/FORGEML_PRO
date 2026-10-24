@@ -1,0 +1,23 @@
+name: Verify ForgeML
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ".[dev,research]"
+      - run: python scripts/train.py --rows 1200
+      - run: pytest -q
+      - run: ruff check .
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node --check frontend/app.js
+      - run: docker build -t forgeml-ci .
+      - run: docker run -d --name forge -p 8000:8000 forgeml-ci
+      - run: python scripts/container_smoke.py
+      - if: always()
+        run: docker logs forge

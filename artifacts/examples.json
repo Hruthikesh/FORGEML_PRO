@@ -1,0 +1,82 @@
+[
+  {
+    "TransactionID": 2326,
+    "TransactionDT": 418500,
+    "TransactionAmt": 9.82,
+    "card1": 1082,
+    "addr1": 6,
+    "DeviceInfo": "mobile",
+    "ProductCD": "W",
+    "P_emaildomain": null
+  },
+  {
+    "TransactionID": 2327,
+    "TransactionDT": 418680,
+    "TransactionAmt": 23.82,
+    "card1": 1034,
+    "addr1": 2,
+    "DeviceInfo": "desktop",
+    "ProductCD": "C",
+    "P_emaildomain": "other.example"
+  },
+  {
+    "TransactionID": 2328,
+    "TransactionDT": 418860,
+    "TransactionAmt": 34.56,
+    "card1": 1016,
+    "addr1": 2,
+    "DeviceInfo": "desktop",
+    "ProductCD": "W",
+    "P_emaildomain": null
+  },
+  {
+    "TransactionID": 2329,
+    "TransactionDT": 419040,
+    "TransactionAmt": 196.61,
+    "card1": 1002,
+    "addr1": 14,
+    "DeviceInfo": "desktop",
+    "ProductCD": "W",
+    "P_emaildomain": "mail.example"
+  },
+  {
+    "TransactionID": 2330,
+    "TransactionDT": 419220,
+    "TransactionAmt": 20.23,
+    "card1": 1014,
+    "addr1": 6,
+    "DeviceInfo": "desktop",
+    "ProductCD": "C",
+    "P_emaildomain": "mail.example"
+  },
+  {
+    "TransactionID": 2331,
+    "TransactionDT": 419400,
+    "TransactionAmt": 20.56,
+    "card1": 1006,
+    "addr1": 2,
+    "DeviceInfo": "desktop",
+    "ProductCD": "C",
+    "P_emaildomain": "other.example"
+  },
+  {
+    "TransactionID": 2332,
+    "TransactionDT": 419580,
+    "TransactionAmt": 155.82,
+    "card1": 1086,
+    "addr1": 4,
+    "DeviceInfo": "mobile",
+    "ProductCD": "C",
+    "P_emaildomain": null
+  },
+  {
+    "TransactionID": 2333,
+    "TransactionDT": 419760,
+    "TransactionAmt": 22.76,
+    "card1": 1026,
+    "addr1": 1,
+    "DeviceInfo": "desktop",
+    "ProductCD": "R",
+    "P_emaildomain": null
+  }
+]

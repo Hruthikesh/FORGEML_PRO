@@ -1,0 +1,31 @@
+{
+  "mode": "SYNTHETIC DEMONSTRATION",
+  "model_version": "rf-unweighted-all-495cdd15",
+  "transport": "DIRECT PYTHON BUNDLE; no HTTP, no concurrency, no network overhead",
+  "requests": 12,
+  "concurrency": 1,
+  "warmup_requests": 1,
+  "history_rows": 2550,
+  "p50_ms": 723.7194000044838,
+  "p95_ms": 784.7412749972136,
+  "throughput_rps": 1.363458587227869,
+  "latencies_ms": [
+    719.4184999971185,
+    721.1619000008795,
+    731.3900000008289,
+    714.2002999898978,
+    726.276900008088,
+    719.8121000110405,
+    705.0313999934588,
+    766.8629999971017,
+    739.8468000028515,
+    720.8943000005092,
+    729.6597000095062,
+    806.5924999973504
+  ],
+  "hardware": {
+    "platform": "Windows-10-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel"
+  },
+  "limitation": "Reconstructs past features per call; not optimized for production latency."
+}

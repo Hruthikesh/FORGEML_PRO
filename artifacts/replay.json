@@ -1,0 +1,336 @@
+{
+  "mode": "SYNTHETIC DEMONSTRATION",
+  "windows": [
+    {
+      "window": 0,
+      "transactions": 100,
+      "relative_start": 418500,
+      "relative_end": 436320,
+      "latency_ms": 12.242098999995505,
+      "alert_rate": 0.15,
+      "mean_score": 0.034123917805422635,
+      "drift": {
+        "features": [
+          {
+            "feature": "amount",
+            "psi": 0.12042167313538091,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "log_amount",
+            "psi": 0.12042167313538091,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "relative_hour",
+            "psi": 8.870004036813429,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "relative_day",
+            "psi": 7.826945057682301,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "missing_fields",
+            "psi": 0.0,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_card_count",
+            "psi": 9.336098817673172,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_card_mean",
+            "psi": 2.8141433092358223,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "seconds_since_previous",
+            "psi": 0.11272607029275916,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "card_24h_count",
+            "psi": 0.9505446912295257,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_entity_degree",
+            "psi": 11.105913082558729,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_component_size",
+            "psi": 3.1234196121088362,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_components_linked",
+            "psi": 0.0,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "observed_entity_count",
+            "psi": 0.0,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          }
+        ],
+        "prediction_psi": 3.19953997828847,
+        "warning": true,
+        "interpretation": "Covariate drift is a warning, not proof of predictive degradation."
+      },
+      "delayed_quality": null
+    },
+    {
+      "window": 1,
+      "transactions": 100,
+      "relative_start": 436500,
+      "relative_end": 454320,
+      "latency_ms": 18.32880699992529,
+      "alert_rate": 0.13,
+      "mean_score": 0.030297214375189164,
+      "drift": {
+        "features": [
+          {
+            "feature": "amount",
+            "psi": 0.11357015796077166,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "log_amount",
+            "psi": 0.11357015796077166,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "relative_hour",
+            "psi": 7.978887671722889,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "relative_day",
+            "psi": 7.826945057682301,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "missing_fields",
+            "psi": 0.0,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_card_count",
+            "psi": 8.304197621599895,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_card_mean",
+            "psi": 1.8904799186236116,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "seconds_since_previous",
+            "psi": 0.08586438412885178,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "card_24h_count",
+            "psi": 0.8455037026358283,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_entity_degree",
+            "psi": 10.992612792863497,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_component_size",
+            "psi": 3.1234196121088362,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_components_linked",
+            "psi": 0.0,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "observed_entity_count",
+            "psi": 0.0,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          }
+        ],
+        "prediction_psi": 5.03791816192645,
+        "warning": true,
+        "interpretation": "Covariate drift is a warning, not proof of predictive degradation."
+      },
+      "delayed_quality": null
+    },
+    {
+      "window": 2,
+      "transactions": 25,
+      "relative_start": 454500,
+      "relative_end": 458820,
+      "latency_ms": 81.21783600014169,
+      "alert_rate": 0.16,
+      "mean_score": 0.03037649798068017,
+      "drift": {
+        "features": [
+          {
+            "feature": "amount",
+            "psi": 2.615656128751655,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "log_amount",
+            "psi": 2.615656128751655,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "relative_hour",
+            "psi": 12.513134769003342,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "relative_day",
+            "psi": 7.826945057682301,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "missing_fields",
+            "psi": 0.0,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_card_count",
+            "psi": 11.84372249316899,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_card_mean",
+            "psi": 3.690142264079285,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "seconds_since_previous",
+            "psi": 1.3328247428712765,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "card_24h_count",
+            "psi": 0.7936233797279008,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_entity_degree",
+            "psi": 11.203744209934467,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_component_size",
+            "psi": 3.1234196121088362,
+            "warning": true,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "prior_components_linked",
+            "psi": 0.0,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          },
+          {
+            "feature": "observed_entity_count",
+            "psi": 0.0,
+            "warning": false,
+            "reference_missing": 0.0,
+            "current_missing": 0.0
+          }
+        ],
+        "prediction_psi": 6.577861656889621,
+        "warning": true,
+        "interpretation": "Covariate drift is a warning, not proof of predictive degradation."
+      },
+      "delayed_quality": {
+        "labeled_count": 100,
+        "average_precision": null,
+        "brier": 0.0027780992898441188
+      }
+    }
+  ],
+  "label_delay_batches": 2,
+  "induced_shift": false,
+  "note": "Replay labels become visible only after the configured batch delay. Last delayed batches remain pending."
+}

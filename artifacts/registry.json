@@ -1,0 +1,138 @@
+{
+  "champion": "rf-unweighted-all-495cdd15",
+  "previous": null,
+  "challenger": "challenger-rf-495cdd15",
+  "versions": {
+    "rf-unweighted-all-495cdd15": {
+      "average_precision": 0.1299989463792091,
+      "roc_auc": 0.7376543209876543,
+      "precision": 0.09375,
+      "recall": 0.3333333333333333,
+      "f1": 0.14634146341463414,
+      "brier": 0.03801419736309658,
+      "precision_at_k": 0.09090909090909091,
+      "recall_at_budget": 0.1111111111111111,
+      "review_budget": 11,
+      "recall_at_fpr_01": 0.1111111111111111,
+      "false_positives_per_1000": 128.88888888888889,
+      "confusion_matrix": [
+        [
+          187,
+          29
+        ],
+        [
+          6,
+          3
+        ]
+      ],
+      "assumed_cost": 745.0,
+      "threshold": 0.047619047619047616,
+      "count": 225
+    },
+    "challenger-rf-495cdd15": {
+      "average_precision": 0.13124398854031002,
+      "roc_auc": 0.6491769547325102,
+      "precision": 0.04,
+      "recall": 1.0,
+      "f1": 0.07692307692307693,
+      "brier": 0.12989338320793015,
+      "precision_at_k": 0.18181818181818182,
+      "recall_at_budget": 0.2222222222222222,
+      "review_budget": 11,
+      "recall_at_fpr_01": 0.0,
+      "false_positives_per_1000": 960.0,
+      "confusion_matrix": [
+        [
+          0,
+          216
+        ],
+        [
+          0,
+          9
+        ]
+      ],
+      "assumed_cost": 1080.0,
+      "threshold": 0.047619047619047616,
+      "count": 225,
+      "latency_ms": 10.820787999998881,
+      "latency_measurement": "mean per-row wall time in reserved-window batch, includes feature reconstruction"
+    }
+  },
+  "history": [
+    {
+      "timestamp": "2026-10-24T16:14:31.162834+00:00",
+      "action": "registered",
+      "version": "rf-unweighted-all-495cdd15"
+    },
+    {
+      "timestamp": "2026-10-24T16:27:08.575562+00:00",
+      "action": "rejected",
+      "version": "challenger-rf-495cdd15",
+      "reasons": [
+        "Insufficient average-precision improvement",
+        "Calibration regression"
+      ],
+      "champion_metrics": {
+        "average_precision": 0.1299989463792091,
+        "roc_auc": 0.7376543209876543,
+        "precision": 0.09375,
+        "recall": 0.3333333333333333,
+        "f1": 0.14634146341463414,
+        "brier": 0.03801419736309658,
+        "precision_at_k": 0.09090909090909091,
+        "recall_at_budget": 0.1111111111111111,
+        "review_budget": 11,
+        "recall_at_fpr_01": 0.1111111111111111,
+        "false_positives_per_1000": 128.88888888888889,
+        "confusion_matrix": [
+          [
+            187,
+            29
+          ],
+          [
+            6,
+            3
+          ]
+        ],
+        "assumed_cost": 745.0,
+        "threshold": 0.047619047619047616,
+        "count": 225,
+        "latency_ms": 6.764449333358142,
+        "latency_measurement": "mean per-row wall time in reserved-window batch, includes feature reconstruction"
+      },
+      "challenger_metrics": {
+        "average_precision": 0.13124398854031002,
+        "roc_auc": 0.6491769547325102,
+        "precision": 0.04,
+        "recall": 1.0,
+        "f1": 0.07692307692307693,
+        "brier": 0.12989338320793015,
+        "precision_at_k": 0.18181818181818182,
+        "recall_at_budget": 0.2222222222222222,
+        "review_budget": 11,
+        "recall_at_fpr_01": 0.0,
+        "false_positives_per_1000": 960.0,
+        "confusion_matrix": [
+          [
+            0,
+            216
+          ],
+          [
+            0,
+            9
+          ]
+        ],
+        "assumed_cost": 1080.0,
+        "threshold": 0.047619047619047616,
+        "count": 225,
+        "latency_ms": 10.820787999998881,
+        "latency_measurement": "mean per-row wall time in reserved-window batch, includes feature reconstruction"
+      }
+    }
+  ],
+  "criteria": {
+    "min_ap_gain": 0.005,
+    "max_brier_regression": 0.02,
+    "max_latency_ms": 250
+  }
+}

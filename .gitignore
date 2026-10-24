@@ -1,0 +1,27 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+.env
+.kaggle/
+data/raw/*
+!data/raw/.gitkeep
+artifacts/*.joblib
+artifacts/registry/*.joblib
+mlruns/
+*.log
+.test-tmp*/
+# Local delivery and development records (not repository source)
+/PROJECT_STATE.md
+/USER_SPECIFICATION.md
+/DELIVERY_MANIFEST.json
+/Copy-ToProjectFolder.ps1
+/planning/
+/artifacts/test-output.txt
+/artifacts/test-results.xml
+/artifacts/lint-output.txt
+/artifacts/frontend-check.txt
+/artifacts/service-verification.json
+/artifacts/registry-archive-*.json
+.workspace-access-check
