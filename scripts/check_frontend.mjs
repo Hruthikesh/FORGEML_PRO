@@ -12,7 +12,7 @@ const context=vm.createContext({console,Map,Set,Number,String,Math,JSON,Object,A
 vm.runInContext(source,context);
 await new Promise(r=>setTimeout(r,0));
 assert.match(nodes.get('#mode').textContent,/SYNTHETIC/);
-assert.match(nodes.get('#notice').innerHTML,/do not measure IEEE-CIS/);
+assert.match(nodes.get('#notice').innerHTML,/Synthetic data demo/);
 for(const view of ['overview','laboratory','prediction','graph','monitoring','governance']) {
  vm.runInContext(`state.view='${view}'; render();`,context);
  const content=nodes.get('#view').innerHTML;

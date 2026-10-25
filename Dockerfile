@@ -2,7 +2,7 @@ FROM python:3.11-slim
 WORKDIR /app
 COPY pyproject.toml ./
 COPY forgeml ./forgeml
-RUN pip install --no-cache-dir .
+RUN pip install --no-cache-dir ".[boosting]"
 COPY frontend ./frontend
 COPY scripts ./scripts
 COPY artifacts ./artifacts

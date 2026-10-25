@@ -25,3 +25,12 @@ mlruns/
 /artifacts/service-verification.json
 /artifacts/registry-archive-*.json
 .workspace-access-check
+
+# Private real-data runs and local browser output
+/runs/
+/browser-results/
+/dist/
+/build/
+*.egg-info/
+.review-access-check
+.pytest-review*/

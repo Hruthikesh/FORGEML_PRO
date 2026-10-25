@@ -45,6 +45,15 @@ def validate_transactions(df):
     required = {"TransactionID", "TransactionDT", "TransactionAmt", "isFraud"}
     if not required.issubset(df):
         raise ValueError(f"Missing columns: {required - set(df)}")
+    if not all(pd.api.types.is_numeric_dtype(df[column]) for column in required):
+        raise ValueError("Required fields must use numeric columns")
+    numeric = df[list(required)]
+    if not np.isfinite(numeric.to_numpy(dtype=float)).all():
+        raise ValueError("Required fields must contain finite numeric values")
+    if ((numeric.TransactionID % 1) != 0).any() or (numeric.TransactionID < 0).any():
+        raise ValueError("TransactionID must be a nonnegative integer")
+    if (numeric.TransactionDT < 0).any() or (numeric.TransactionAmt <= 0).any():
+        raise ValueError("Time must be nonnegative and amount must be positive")
     if df.TransactionID.duplicated().any() or df[list(required)].isna().any().any():
         raise ValueError("Duplicate IDs or missing required values")
     if not df.isFraud.isin([0, 1]).all() or (df.TransactionAmt < 0).any():

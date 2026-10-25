@@ -32,7 +32,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from .data import chronological_splits, fingerprint, load_transactions, validate_transactions
-from .features import engineer
+from .features import RAW_COLUMNS, engineer
 
 
 def metrics(y, p, threshold=0.5):
@@ -110,6 +110,8 @@ def _json(path, obj):
 def run_training(output_dir=Path("artifacts"), data_dir=None, n_rows=3000, seed=42, optuna_trials=3):
     started = time.perf_counter()
     out = Path(output_dir)
+    if data_dir is not None and out.resolve() == (Path(__file__).resolve().parents[1] / "artifacts").resolve():
+        raise ValueError("Keep real data out of the committed demo artifacts: use --output-dir runs/ieee")
     out.mkdir(parents=True, exist_ok=True)
     df, mode = load_transactions(data_dir, n_rows)
     validate_transactions(df)
@@ -321,8 +323,10 @@ def run_training(output_dir=Path("artifacts"), data_dir=None, n_rows=3000, seed=
             },
             out / (version + ".joblib"),
         )
-    df.iloc[governance].to_csv(out / "replay-data.csv", index=False)
-    examples = json.loads(df.iloc[governance[:8]].drop(columns="isFraud").to_json(orient="records"))
+    # Store only the feature contract; never export unrelated raw identity columns.
+    serving_columns = [column for column in ["TransactionID", *RAW_COLUMNS] if column in df]
+    df.iloc[governance][[*serving_columns, "isFraud"]].to_csv(out / "replay-data.csv", index=False)
+    examples = json.loads(df.iloc[governance[:8]][serving_columns].to_json(orient="records"))
     _json(out / "examples.json", examples)
     from .monitoring import evidently_report, replay
 

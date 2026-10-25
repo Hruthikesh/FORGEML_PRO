@@ -65,21 +65,21 @@ def test_join_cardinality_rejects_duplicates(tmp_path):
 
 def test_governance_promote_reject_and_rollback(tmp_path):
     p = tmp_path / "registry.json"
-    champion = {"average_precision": 0.3, "brier": 0.1}
+    champion = {"average_precision": 0.3, "brier": 0.1, "latency_ms": 10}
     initialize_registry(p, "a", champion)
-    state = evaluate_candidate(p, "bad", champion, {"average_precision": 0.2, "brier": 0.09})
+    state = evaluate_candidate(p, "bad", champion, {"average_precision": 0.2, "brier": 0.09, "latency_ms": 10})
     assert state["champion"] == "a"
     assert state["history"][-1]["action"] == "rejected"
-    state = evaluate_candidate(p, "good", champion, {"average_precision": 0.4, "brier": 0.09})
+    state = evaluate_candidate(p, "good", champion, {"average_precision": 0.4, "brier": 0.09, "latency_ms": 10})
     assert state["champion"] == "good"
     assert rollback(p)["champion"] == "a"
 
 
 def test_ineligible_labels_block_promotion(tmp_path):
     p = tmp_path / "registry.json"
-    metrics = {"average_precision": 0.3, "brier": 0.1}
+    metrics = {"average_precision": 0.3, "brier": 0.1, "latency_ms": 10}
     initialize_registry(p, "a", metrics)
-    state = evaluate_candidate(p, "b", metrics, {"average_precision": 0.9, "brier": 0.01}, eligible=False)
+    state = evaluate_candidate(p, "b", metrics, {"average_precision": 0.9, "brier": 0.01, "latency_ms": 10}, eligible=False)
     assert state["champion"] == "a"
 
 

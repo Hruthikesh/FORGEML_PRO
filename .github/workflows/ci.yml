@@ -8,16 +8,26 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install -e ".[dev,research]"
-      - run: python scripts/train.py --rows 1200
+      - run: pip install -e ".[dev,research,browser]"
+      - run: python scripts/train.py --rows 3000
       - run: pytest -q
       - run: ruff check .
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
       - run: node --check frontend/app.js
+      - run: node scripts/check_frontend.mjs
       - run: docker build -t forgeml-ci .
       - run: docker run -d --name forge -p 8000:8000 forgeml-ci
       - run: python scripts/container_smoke.py
+      - run: python -m playwright install --with-deps chromium
+      - run: python scripts/check_browser.py
+        env:
+          FORGEML_EXPORT_SCREENSHOTS: "1"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dashboard-screenshots
+          path: browser-results/
       - if: always()
         run: docker logs forge

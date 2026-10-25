@@ -84,7 +84,7 @@ def create_app(artifact_dir: Path | None = None) -> Application:
     )
     app.state.bundle = None
     app.state.bundle_stamp = None
-    app.state.telemetry = {"requests": 0, "errors": 0, "predictions": 0, "latency_ms": []}
+    app.state.telemetry = {"requests": 0, "errors": 0, "predictions": 0, "latency_ms": [], "latency_sum_ms": 0.0}
     app.state.lock = threading.RLock()
 
     def read_json(filename: str, default: Any = None):
@@ -123,6 +123,7 @@ def create_app(artifact_dir: Path | None = None) -> Application:
             stats = app.state.telemetry
             stats["requests"] += 1
             stats["errors"] += int(response.status_code >= 400)
+            stats["latency_sum_ms"] += elapsed
             stats["latency_ms"].append(elapsed)
             del stats["latency_ms"][:-10000]
         response.headers["X-Request-ID"] = request_id
@@ -213,8 +214,8 @@ def create_app(artifact_dir: Path | None = None) -> Application:
             "# TYPE forgeml_predictions_total counter",
             f"forgeml_predictions_total {stats['predictions']}",
             "# TYPE forgeml_request_latency_ms summary",
-            f"forgeml_request_latency_ms_count {len(latencies)}",
-            f"forgeml_request_latency_ms_sum {sum(latencies):.6f}",
+            f"forgeml_request_latency_ms_count {stats['requests']}",
+            f"forgeml_request_latency_ms_sum {stats['latency_sum_ms']:.6f}",
         ]
         for quantile in (0.5, 0.95):
             lines.append(

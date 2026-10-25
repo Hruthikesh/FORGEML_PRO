@@ -1,6 +1,8 @@
 """Local demonstration registry with auditable, quality-gated transitions."""
 
+import copy
 import json
+import math
 import os
 from datetime import UTC, datetime
 from pathlib import Path
@@ -58,6 +60,21 @@ def evaluate_candidate(path, challenger_version, champion_metrics, challenger_me
         state["challenger"] = challenger_version
         state["versions"][challenger_version] = challenger_metrics
         reasons = []
+        for label, measured in [("champion", champion_metrics), ("challenger", challenger_metrics)]:
+            for metric in ("average_precision", "brier", "latency_ms"):
+                value = measured.get(metric)
+                if not isinstance(value, (int, float)) or isinstance(value, bool) or not math.isfinite(value):
+                    reasons.append(f"Missing or non-finite {label} {metric}")
+                elif value < 0 or (metric != "latency_ms" and value > 1):
+                    reasons.append(f"Invalid {label} {metric}")
+        # Invalid measurements must fail closed, including missing latency.
+        if reasons:
+            state["versions"][challenger_version] = {
+                key: value for key, value in challenger_metrics.items()
+                if isinstance(value, (int, float)) and math.isfinite(value)
+            }
+            state["history"].append(_event("rejected", version=challenger_version, reasons=reasons))
+            return _save(path, state)
         if not eligible:
             reasons.append("Ineligible or unavailable delayed labels")
         if (
@@ -105,30 +122,50 @@ def governance_action(output_dir, action, version=None):
         report = json.loads((out / "report.json").read_text(encoding="utf-8"))
         comparison = report["governance_comparison"]
         state = load_registry(path)
+        previous_state = copy.deepcopy(state)
         if action in ["evaluate", "promote"]:
             candidate = comparison["challenger_version"]
             if version and version != candidate:
                 raise ValueError("No trained candidate for requested version")
             if state["champion"] != comparison["champion_version"]:
                 raise ValueError("Comparison stale for current champion; retrain offline")
+            if not (out / "challenger.joblib").is_file():
+                raise FileNotFoundError("Trained challenger bundle is missing")
             state = evaluate_candidate(
                 path, candidate, comparison["champion_metrics"], comparison["challenger_metrics"]
             )
             if state["champion"] == candidate:
-                shutil.copy2(out / "challenger.joblib", out / "bundle.joblib")
+                try:
+                    temporary = out / "bundle.next.joblib"
+                    shutil.copyfile(out / "challenger.joblib", temporary)
+                    os.replace(temporary, out / "bundle.joblib")
+                except OSError:
+                    _save(path, previous_state)
+                    raise
         elif action == "reject":
             state["history"].append(
                 _event("rejected", version=comparison["challenger_version"], reasons=["Explicit operator rejection"])
             )
             state = _save(path, state)
         elif action == "rollback":
-            state = rollback(path)
+            expected_version = state.get("previous")
             source = (
                 "champion-original.joblib"
-                if state["champion"] == comparison["champion_version"]
+                if expected_version == comparison["champion_version"]
                 else "challenger.joblib"
             )
-            shutil.copy2(out / source, out / "bundle.joblib")
+            if not expected_version:
+                raise ValueError("No previous champion available")
+            if not (out / source).is_file():
+                raise FileNotFoundError("Previous champion bundle is missing")
+            state = rollback(path)
+            try:
+                temporary = out / "bundle.next.joblib"
+                shutil.copyfile(out / source, temporary)
+                os.replace(temporary, out / "bundle.joblib")
+            except OSError:
+                _save(path, previous_state)
+                raise
         else:
             raise ValueError("Unknown governance action")
         return state
