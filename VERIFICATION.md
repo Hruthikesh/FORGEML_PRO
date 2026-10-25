@@ -2,21 +2,29 @@
 
 Updated 25 October 2026.
 
-## Completed checks
+[Successful build and browser run](https://github.com/Hruthikesh/FORGEML_PRO/actions/runs/40171802950) for code commit `382e52a`.
 
-- The recorded synthetic run contains 3,000 transactions. The saved model reproduces the holdout metrics in `artifacts/report.json`.
-- The previous GitHub Actions run passed all 34 Python tests, including HTTP tests. Its container smoke check failed because PyArrow was missing from the image.
-- The review adds the missing dependency, includes boosting model libraries in the container, and adds regression tests for invalid inputs and failed model replacement.
-- Local review: 34 tests passed and 10 HTTP tests were skipped because this environment cannot create local sockets. The additional offline-viewer regression test also passed.
-- Ruff and frontend rendering checks pass. The offline viewer includes its scripts, styles and recorded data.
+| Check | Result |
+| --- | --- |
+| Synthetic training | Passed with 3,000 transactions |
+| Python tests | 47 passed, no skips; one dependency deprecation warning |
+| Ruff | Passed |
+| JavaScript syntax and six-view rendering | Passed |
+| Docker image build | Passed |
+| Container readiness and prediction | Passed |
+| Browser navigation | All six views passed without JavaScript errors |
+| Browser prediction | Selected example and missing optional field verified in the submitted request |
+| Mobile overview | No horizontal page overflow at 390px width |
+| README screenshots | Captured from the running app in Chromium and visually reviewed |
+| README links and images | Local targets checked |
 
-## Build verification
+The screenshots come from the linked CI run, which includes the optional research packages. The committed reference report and plots describe the earlier eight-model run. They are separate runs and can select different models.
 
-The workflow runs training, Python tests, frontend checks, a Docker build, a prediction smoke test and browser checks. See the latest [GitHub Actions run](https://github.com/Hruthikesh/FORGEML_PRO/actions) for the result for each commit.
-The updated container and browser checks are pending their first run at the time of this review.
+The local environment passed the non-HTTP checks; its socket restrictions prevented local HTTP testing. HTTP, Docker and browser results above were verified in GitHub Actions.
 
-## Scope
+## Remaining scope
 
-The current results use synthetic data. IEEE-CIS training and full-dataset performance remain unverified until authorized CSV files are available.
-The registry uses local files and a process lock; it is not a distributed model service. The direct Python benchmark is not an HTTP load test.
-Optional research integrations depend on installed packages. Inspect a run's report for the actual integrations and models used.
+Current results use synthetic data. Full IEEE-CIS training and performance remain unverified until authorized CSV files are available.
+The model registry uses local files and a process lock. It is not a distributed service, and the direct Python benchmark is not an HTTP load test.
+
+See the [review notes](docs/review-notes.md) for the issues fixed in this pass.
