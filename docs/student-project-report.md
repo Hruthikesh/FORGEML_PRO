@@ -8,7 +8,7 @@ Fraud detection is an imbalanced classification problem: a model can achieve hig
 
 Develop a reproducible local ML project that compares transaction, temporal and graph-derived features; calibrates predicted probabilities; exposes inference through a service implementation; and makes experimental evidence understandable through a dashboard.
 
-The intended real dataset is IEEE-CIS. The executed demonstration currently uses 3,000 synthetic transactions. Real-data access and additional runtime verification remain pending. This report describes the existing implementation, not a completed real-world fraud system.
+The intended real dataset is IEEE-CIS. The executed demonstration currently uses 3,000 synthetic transactions. Real-data evaluation is the next step.
 
 ## Approach
 
@@ -30,7 +30,7 @@ The intended real dataset is IEEE-CIS. The executed demonstration currently uses
 | Average precision | 0.3323 |
 | ROC-AUC | 0.6457 |
 | Calibrated Brier score | 0.0185 |
-| Automated tests | 24 passed; 10 transport tests skipped |
+| Automated checks | See [verification notes](../VERIFICATION.md) and GitHub Actions |
 
 All values come from artifacts/report.json and test evidence. The saved model reproduces the recorded evaluation metrics. These values do not establish performance on IEEE-CIS or real fraud.
 
@@ -40,12 +40,12 @@ The trained challenger was rejected because its average-precision gain was too s
 
 ## Engineering evidence
 
-The repository includes source, trained synthetic bundles, experiment artifacts, a six-view dashboard, service validation, replay monitoring, a local registry, Docker/CI definitions and seven generated research figures. Direct singleton Python inference measured approximately 724 ms p50 and 785 ms p95 over 12 calls, including feature-history reconstruction. This is a limitation to improve, not a low-latency production claim.
+The repository includes source, training scripts, synthetic experiment artifacts, a six-view dashboard, service validation, replay monitoring, a local registry, Docker/CI definitions and seven generated research figures. Direct singleton Python inference measured approximately 724 ms p50 and 785 ms p95 over 12 calls, including feature-history reconstruction. This is a limitation to improve, not a low-latency production claim.
 
 ## Limitations
 
-Authorized real data is still needed. Local network restrictions prevented HTTP/browser checks and genuine application screenshots. Docker was unavailable. Optional LightGBM, Optuna, MLflow, SHAP and Evidently paths have not run because their dependencies were unavailable. There is no production deployment, financial integration, formal uncertainty analysis or distributed streaming feature store.
+The project still needs evaluation on authorized IEEE-CIS data and larger forward-validation windows. It uses local files for model storage, and has no authentication or distributed streaming state. Optional integrations depend on the packages installed for each run.
 
 ## Conclusion
 
-The executed demonstration shows a reproducible way to test fraud-model ideas while keeping temporal evaluation and serving artifacts consistent. The next scientific step is a new frozen IEEE-CIS experiment. The next engineering step is live transport/browser validation and efficient stateful historical features. Full completion is tracked in VERIFICATION.md.
+The executed demonstration shows a reproducible way to test fraud-model ideas while keeping temporal evaluation and serving artifacts consistent. The next scientific step is a new frozen IEEE-CIS experiment. The next engineering step is more efficient historical-feature lookup. Build and test results are tracked in VERIFICATION.md.

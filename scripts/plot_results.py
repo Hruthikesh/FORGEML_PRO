@@ -35,7 +35,7 @@ def save(fig, name):
     fig.text(
         0.02,
         0.015,
-        "ForgeML Pro  |  SYNTHETIC DEMONSTRATION · executed experiment artifacts",
+        "ForgeML Pro | Synthetic dataset",
         color="#9aacc9",
         fontsize=9,
     )
@@ -51,7 +51,7 @@ ax.barh(names, values, color=COLORS[: len(models)])
 ax.invert_yaxis()
 ax.set(
     xlabel="Average precision on chronological validation period",
-    title="Model laboratory · measured validation performance",
+    title="Model comparison",
 )
 for i, v in enumerate(values):
     ax.text(v + 0.003, i, f"{v:.3f}", va="center", fontsize=9)
@@ -94,14 +94,14 @@ fig, ax = plt.subplots(figsize=(11, 6))
 ax.set(xlim=(0, 12), ylim=(0, 7))
 ax.axis("off")
 boxes = [
-    (0.2, 5.4, "Authorized IEEE-CIS\nor synthetic fixture"),
-    (3.3, 5.4, "Strict temporal &\ngraph features"),
+    (0.2, 5.4, "Transaction data\nSynthetic / IEEE-CIS"),
+    (3.3, 5.4, "Temporal and\ngraph features"),
     (6.4, 5.4, "Train / validate /\ncalibrate / final test"),
-    (9.5, 5.4, "Versioned bundle\n+ JSON evidence"),
+    (9.5, 5.4, "Saved model\nand results"),
     (0.2, 2.9, "MLflow tracking*\nOptuna / SHAP*"),
     (3.3, 2.9, "Model registry\nquality gates"),
-    (6.4, 2.9, "FastAPI preferred*\nStarlette fallback"),
-    (9.5, 2.9, "Six-view dashboard\n+ artifact snapshot"),
+    (6.4, 2.9, "Prediction API\nFastAPI"),
+    (9.5, 2.9, "Dashboard\nand offline viewer"),
     (3.3, 0.5, "Challenger training\n& guarded rollback"),
     (6.4, 0.5, "Replay + delayed labels\nPSI / metrics / Evidently*"),
 ]
@@ -128,11 +128,11 @@ for a, b in [(0, 1), (1, 2), (2, 3), (3, 6), (6, 7), (6, 9), (9, 8), (8, 5), (5,
         arrowprops={"arrowstyle": "->", "color": "#627993", "connectionstyle": "arc3,rad=.1"},
         zorder=0,
     )
-ax.set_title("ForgeML Pro · offline research → local serving → governance", fontsize=16)
+ax.set_title("ForgeML Pro · Project architecture", fontsize=16)
 fig.text(
     0.03,
     0.065,
-    "* Optional or environment-blocked integrations are identified in VERIFICATION.md; this is an architecture diagram, not deployment evidence.",
+    "* Optional research packages",
     fontsize=8,
     color="#aab9d2",
 )
@@ -144,11 +144,11 @@ axes[0].plot([w["window"] for w in windows], [w["mean_score"] for w in windows],
 axes[0].set(title="Replay prediction scores", xlabel="Chronological batch", ylabel="Mean calibrated risk")
 axes[1].bar([w["window"] for w in windows], [w["drift"]["prediction_psi"] for w in windows], color=COLORS[1])
 axes[1].set(
-    title="Prediction distribution shift", xlabel="Chronological batch", ylabel="PSI · warning, not degradation proof"
+    title="Prediction distribution shift", xlabel="Chronological batch", ylabel="Prediction PSI"
 )
 fig.tight_layout(rect=(0, 0.08, 1, 1))
 save(fig, "replay-monitoring.png")
-print("Generated five figures from actual report.json")
+print("Generated result figures from recorded artifacts")
 
 # Measured direct-bundle latency (not an HTTP benchmark).
 benchmark_path = ROOT / "artifacts/bundle-benchmark.json"
@@ -194,7 +194,7 @@ ax.set_title("Observed transaction–attribute relationships · bounded holdout 
 fig.text(
     0.08,
     0.06,
-    "Weak anonymized attributes are not verified customer identities. This is a generated research figure.",
+    "Connections represent shared anonymized transaction attributes.",
     fontsize=9,
     color="#aab9d2",
 )

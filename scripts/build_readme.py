@@ -10,7 +10,17 @@ text = f"""# ForgeML Pro
 A machine learning project that explores fraud detection using transaction history.
 It includes model training, an API and a dashboard for exploring predictions and results.
 
-**The checked-in results use synthetic data.** They show that the workflow runs; they are not evidence of accuracy on real bank transactions. The IEEE-CIS dataset is not included.
+**Demo dataset:** synthetic transactions. IEEE-CIS files can be imported locally; they are not included in this repository.
+
+## Dashboard
+
+Screenshots from the running app using the synthetic demo:
+
+![Dashboard overview](docs/assets/dashboard-overview.jpg)
+
+![Transaction prediction](docs/assets/dashboard-prediction.jpg)
+
+## Architecture
 
 ![Project architecture](docs/assets/system-architecture.png)
 
@@ -60,7 +70,7 @@ The full experiment is saved in `artifacts/report.json`.
 
 ![Model comparison from the saved run](docs/assets/model-comparison.png)
 
-The images in this README are diagrams and plots generated from the project, not screenshots of a deployed service.
+The chart summarizes the saved reference run. Screenshots show a separate automated demo run.
 
 ## Use the IEEE-CIS dataset
 
@@ -105,7 +115,6 @@ See [verification notes](VERIFICATION.md) for the latest checks and limitations.
 
 - Run and evaluate the full workflow on authorized IEEE-CIS data.
 - Add repeated forward validation; a single small holdout is not enough to establish reliability.
-- Test the dashboard in a browser and add actual screenshots.
 - Add authentication and a shared registry before considering a multi-user service.
 
 Optional research integrations can be installed with `python -m pip install -e ".[research]"`.

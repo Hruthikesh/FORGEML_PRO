@@ -5,3 +5,9 @@ data/raw
 .pytest_cache
 work
 *.log
+
+runs
+browser-results
+.env
+.pytest-review*
+mlruns

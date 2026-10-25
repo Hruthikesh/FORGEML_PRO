@@ -105,4 +105,3 @@ async function load() {
 document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{state.view=b.dataset.view;location.hash=state.view;$('#error').hidden=true;render();}));
 window.addEventListener('hashchange',()=>{if(views[location.hash.slice(1)]){state.view=location.hash.slice(1);render();}});
 $('#refresh').addEventListener('click',load);state.view=views[location.hash.slice(1)]?location.hash.slice(1):'overview';load();
-

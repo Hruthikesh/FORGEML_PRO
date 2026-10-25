@@ -69,7 +69,7 @@ applySnapshotState();
     js = (frontend / "app.js").read_text(encoding="utf-8-sig").replace("</script", "<\\/script")
     html = (frontend / "index.html").read_text(encoding="utf-8-sig")
     html = html.replace(
-        "<title>ForgeML Pro · Fraud intelligence</title>", "<title>ForgeML Pro · Offline artifact snapshot</title>"
+        "<title>ForgeML Pro · Fraud detection dashboard</title>", "<title>ForgeML Pro · Offline artifact snapshot</title>"
     )
     html = html.replace(
         '<link rel="stylesheet" href="/static/styles.css">',

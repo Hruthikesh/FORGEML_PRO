@@ -61,3 +61,24 @@ def test_offline_viewer_embeds_assets(tmp_path):
     assert 'href="/static/styles.css"' not in html
     assert 'id="snapshot-artifacts"' in html
     assert "async function load()" in html
+
+def test_metrics_totals_survive_rolling_window(tmp_path):
+    from forgeml.api import create_app
+
+    app = create_app(tmp_path)
+    app.state.telemetry.update(requests=15000, latency_sum_ms=30000, latency_ms=[2.0] * 10000)
+    route = next(route for route in app.routes if getattr(route, "path", None) == "/metrics")
+    handler = getattr(route.endpoint, "sync_handler", route.endpoint)
+    result = handler()
+    assert "forgeml_request_latency_ms_count 15000" in result
+    assert "forgeml_request_latency_ms_sum 30000.000000" in result
+
+
+def test_real_data_cannot_overwrite_committed_demo():
+    from pathlib import Path
+
+    from forgeml.training import run_training
+
+    root = Path(__file__).resolve().parents[1]
+    with pytest.raises(ValueError, match="runs/ieee"):
+        run_training(root / "artifacts", data_dir=root / "data/raw")

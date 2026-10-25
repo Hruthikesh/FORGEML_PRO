@@ -25,4 +25,3 @@ assert.match(vm.runInContext(`predictionResult({probability:.75,threshold:.1,ris
 for(const path of ['styles.css','app.js']) assert(fs.existsSync(new URL(`frontend/${path}`,root)));
 assert(html.includes('aria-live="polite"'));
 console.log('Frontend checks passed: six data-driven views, synthetic provenance, metric formatting, output escaping, assets.');
-

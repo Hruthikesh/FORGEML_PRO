@@ -1,6 +1,6 @@
 # ForgeML Pro model card
 
-Purpose: research and production-style historical fraud simulation. Not a banking deployment or an automated financial decision system.
+Purpose: local experiments in fraud detection using historical transactions.
 
 Data: current trained bundles use 3,000 explicitly synthetic observations. The fixture has a known synthetic signal involving amount/device/card patterns, so performance does not establish real fraud-detection usefulness. IEEE-CIS ingestion is implemented but real-data execution awaits authorized local CSVs.
 

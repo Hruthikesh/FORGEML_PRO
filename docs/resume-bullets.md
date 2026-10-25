@@ -1,8 +1,6 @@
-# Evidence-backed resume wording
+# Project summary
 
-Current state supports these conservative statements:
+- Built a Python fraud detection project with time-based validation, historical transaction features and calibrated model scores; compared eight model configurations on 3,000 synthetic transactions.
+- Developed a dashboard and prediction API with transaction replay, drift monitoring and model comparison, backed by leakage, validation and model serialization tests.
 
-- Implemented a fraud-ML research pipeline with chronological validation, past-only entity/graph features, calibrated probability bundles, and controlled feature/class-weight ablations across eight candidate configurations on a labeled synthetic fixture.
-- Built a six-view fraud-intelligence dashboard and validated inference/service logic, historical replay, delayed-label monitoring, and guarded champion–challenger governance; added automated leakage and serialization-parity tests.
-
-Do not claim IEEE-CIS performance, deployment, SHAP/MLflow execution, production latency, real financial savings, or live financial infrastructure until the corresponding verification items pass. Update test counts and measured results from actual evidence before using them publicly.
+These summaries describe the synthetic demo. Update the dataset and results after evaluating an authorized real-data run.

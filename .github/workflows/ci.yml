@@ -1,5 +1,12 @@
 name: Verify ForgeML
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - "docs/**"
+      - "README.md"
+      - "VERIFICATION.md"
+  pull_request:
+  workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest
