@@ -23,10 +23,16 @@ with sync_playwright() as playwright:
         expect(page.locator("#view")).not_to_be_empty()
         expect(page.locator("#error")).to_be_hidden()
         if view == "prediction":
+            examples = page.request.get("http://127.0.0.1:8000/api/examples").json()["examples"]
             page.locator("#example-select").select_option("0")
+            expect(page.locator('[name="TransactionID"]')).to_have_value(str(examples[0]["TransactionID"]))
             page.locator('[name="card1"]').fill("")
-            page.locator("#predict-form button").click()
+            with page.expect_request(lambda request: request.url.endswith("/predict")) as sent:
+                page.locator("#predict-form button").click()
+            assert sent.value.post_data_json["TransactionID"] == examples[0]["TransactionID"]
+            assert sent.value.post_data_json["card1"] is None
             expect(page.locator("#prediction-result")).to_contain_text("%", timeout=30000)
+            expect(page.locator("#example-select")).to_have_value("0")
             expect(page.locator("#error")).to_be_hidden()
         if view in ["overview", "prediction"]:
             page.screenshot(path=str(output / f"dashboard-{view}.jpg"), type="jpeg", quality=85, full_page=True)
