@@ -629,3 +629,7 @@ footer {
 .chart {
   height:210px}
 }
+
+.chart.bar-chart { height: auto; min-height: 0; }
+.bar-chart text { font-size: 12px; }
+.explanation-row > span:first-child { min-width: 0; overflow-wrap: anywhere; }

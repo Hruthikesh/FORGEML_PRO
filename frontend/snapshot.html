@@ -637,6 +637,10 @@ footer {
   height:210px}
 }
 
+.chart.bar-chart { height: auto; min-height: 0; }
+.bar-chart text { font-size: 12px; }
+.explanation-row > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+
 .snapshot-banner{padding:13px 25px;border-bottom:1px solid #74613b;background:#352b18;color:#f0ce83;font-size:11px;line-height:1.7;letter-spacing:.3px}.snapshot-banner strong{font-weight:700}</style>
 </head>
 <body>
@@ -681,7 +685,7 @@ footer {
 <div class="content">
 <div class="page-heading">
 <div>
-<div class="eyebrow">ADAPTIVE FRAUD DETECTION PROJECT</div>
+<div class="eyebrow">FRAUD DETECTION PROJECT</div>
 <h1 id="page-title">Project overview</h1>
 <p id="page-description">Compare models and explore the results of a training run.</p>
 </div>
@@ -749,7 +753,7 @@ function selected() { const s = state.report.selected_model; return typeof s ===
 function barChart(items, key='value', format=pct) {
  if (!items.length) return empty('No experiment data is available.');
  const max = Math.max(...items.map(x=>Number(x[key]) || 0), .01); const h=items.length*45+25;
- return `<svg class="chart" role="img" aria-label="Model comparison" viewBox="0 0 600 ${h}">${items.map((x,i)=>`<text x="0" y="${i*45+24}">${esc(x.name)}</text><rect x="185" y="${i*45+9}" width="${Math.max(1,(Number(x[key])||0)/max*340)}" height="21" rx="3" fill="${colors[i%colors.length]}" opacity=".85"/><text x="${192+(Number(x[key])||0)/max*340}" y="${i*45+24}">${esc(format(x[key]))}</text>`).join('')}</svg>`;
+ return `<svg class="chart bar-chart" role="img" aria-label="Model comparison" viewBox="0 0 600 ${h}">${items.map((x,i)=>`<text x="0" y="${i*45+24}">${esc(x.name)}</text><rect x="185" y="${i*45+9}" width="${Math.max(1,(Number(x[key])||0)/max*340)}" height="21" rx="3" fill="${colors[i%colors.length]}" opacity=".85"/><text x="${192+(Number(x[key])||0)/max*340}" y="${i*45+24}">${esc(format(x[key]))}</text>`).join('')}</svg>`;
 }
 function lineChart(series, xlabel='Recall', ylabel='Precision') {
  const usable = series.filter(s=>Array.isArray(s.x)&&Array.isArray(s.y)&&s.x.length&&s.y.length);
@@ -786,7 +790,7 @@ function explanation(value) {
  const items=Array.isArray(v)?v.map((x,i)=>typeof x==='object'?{name:x.feature??x.name??i,value:x.shap_value??x.contribution??x.value}:{name:i,value:x}): typeof v==='object'?Object.entries(v).filter(([,x])=>typeof x==='number').map(([name,value])=>({name,value})):[];
  if(!items.length) return safeJson(value);
  const max=Math.max(...items.map(x=>Math.abs(x.value)),.001);
- return `<p class="muted">${esc((value.method??'Recorded model feature contributions') + (value.note?' · '+value.note:''))} · Contributions are model explanations, not causal effects.</p>${items.slice(0,18).map(x=>`<div class="explanation-row"><span>${esc(x.name)}</span><div class="explanation-bar"><span style="width:${Math.abs(x.value)/max*100}%;background:${x.value<0?'var(--blue)':'var(--orange)'}"></span></div><span>${num(x.value,4)}</span></div>`).join('')}`;
+ return `<p class="muted">${esc((value.method??'Recorded model feature contributions') + (value.note?' · '+value.note:''))}</p>${items.slice(0,18).map(x=>`<div class="explanation-row"><span title="${esc(x.name)}">${esc(x.name)}</span><div class="explanation-bar"><span style="width:${Math.abs(x.value)/max*100}%;background:${x.value<0?'var(--blue)':'var(--orange)'}"></span></div><span>${num(x.value,4)}</span></div>`).join('')}`;
 }
 function graphView() {
  const g=state.graph||{}, nodes=g.nodes??[],edges=g.edges??g.links??[];
